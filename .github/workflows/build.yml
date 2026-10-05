@@ -1,27 +1,29 @@
 name: Build Mod Jar
 
-on: [push, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'temurin'
+          java-version: '21'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Build with Gradle
-        run: gradle build
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
         working-directory: BaseDetectorClient
 
-      - name: Upload Jar Artifact
+      - name: Build with Gradle
+        run: ./gradlew build
+        working-directory: BaseDetectorClient
+
+      - name: Capture build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: compiled-mod-jar
