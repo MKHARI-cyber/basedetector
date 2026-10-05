@@ -1,0 +1,1 @@
+{"schemaVersion":1,"id":"basedetector","version":"1.0.0","name":"Base Detector Client","description":"Client-side base visualization helper.","authors":["HariDev"],"environment":"client","entrypoints":{"client":["com.haridev.basedetector.BaseDetectorClient"]},"depends":{"fabricloader":">=0.16.14","minecraft":"~1.21.8","fabric-api":"*"}}
